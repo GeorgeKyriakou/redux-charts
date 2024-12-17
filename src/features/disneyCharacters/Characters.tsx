@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import styles from "./Characters.module.css"
 import { useGetDisneyCharactersQuery } from "./disneyCharactersApiSlice"
 import { LoadingSpinner } from "../../components/LoadingSpinner/LoadingSpinner"
@@ -6,12 +6,33 @@ import { selectCharacter } from "../../utils/reducers/uiStateSlice"
 import { useAppDispatch } from "../../app/hooks"
 import CharactersTable from "../../components/CharachtersTable/CharactersTable"
 import { type DisneyCharacter } from "../../utils/types/DisneyCharsApiResponse"
+import { ChevronUp } from "lucide-react"
 
 export const DisneyCharacters = () => {
   const dispatch = useAppDispatch()
+  const [isBackToTopVisible, setIsBackToTopVisible] = useState(false)
   const [charactersPerPage, updateCharactersPerPage] = useState(50)
   const [currentPageIndex, updateCurrentPageIndex] = useState(1)
   const [searchValue, setSearchValue] = useState<string>("")
+
+  useEffect(() => {
+    const toggleVisibility = () => {
+      if (window.scrollY > 300) {
+        setIsBackToTopVisible(true)
+      } else {
+        setIsBackToTopVisible(false)
+      }
+    }
+    window.addEventListener("scroll", toggleVisibility)
+    return () => window.removeEventListener("scroll", toggleVisibility)
+  }, [])
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    })
+  }
 
   const { data, isError, isLoading, isSuccess } = useGetDisneyCharactersQuery({
     index: currentPageIndex,
@@ -32,6 +53,7 @@ export const DisneyCharacters = () => {
   const handleShowCharacterDetails = (characterId: number) => {
     dispatch(selectCharacter(characterId))
   }
+
   if (isError) {
     return (
       <div>
@@ -47,6 +69,15 @@ export const DisneyCharacters = () => {
   if (isSuccess) {
     return (
       <div>
+        {isBackToTopVisible && (
+          <button
+            onClick={scrollToTop}
+            className={styles.scrollToTopBtn}
+            aria-label="Scroll to top"
+          >
+            <ChevronUp />
+          </button>
+        )}
         <CharactersTable
           info={data.info}
           data={filteredCharacters}

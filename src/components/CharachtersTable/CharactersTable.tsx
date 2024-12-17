@@ -13,7 +13,7 @@ import {
   type ApiInfo,
   type DisneyCharacter,
 } from "../../utils/types/DisneyCharsApiResponse"
-import HeaderOptions from "../HeaderOptions/HeaderOptions"
+import { HeaderOptions } from "../HeaderOptions/HeaderOptions"
 
 interface TableDataProps {
   info: ApiInfo
@@ -83,7 +83,9 @@ export default function CharactersTable({
                   onClick={() => handleShowCharacterDetails(character._id)}
                 >
                   <td>{i + 1}</td>
-                  <td>{character.name}</td>
+                  <td>
+                    <Typography>{character.name}</Typography>
+                  </td>
                   <td>{character.tvShows.length}</td>
                   <td>{character.videoGames.length}</td>
                   <td>{character.allies.join(", ")}</td>

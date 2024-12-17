@@ -32,15 +32,15 @@ const sortedCharacters = (
   return stabilizedRowArray.map(el => el[0]) as DisneyCharacter[]
 }
 
-interface CharactersMUITableProps {
+interface TableContentProps {
   characters: DisneyCharacter[]
   handleShowCharacterDetails: (character: DisneyCharacter) => void
 }
 
-function CharactersMUITable({
+function TableContent({
   characters,
   handleShowCharacterDetails,
-}: CharactersMUITableProps) {
+}: TableContentProps) {
   const [orderDirection, setOrderDirection] = useState<"asc" | "desc">("asc")
   const [orderBy, setOrderBy] = useState("")
 
@@ -70,6 +70,7 @@ function CharactersMUITable({
             return (
               <TableRow
                 key={character._id}
+                style={{ cursor: "pointer" }}
                 onClick={() => handleShowCharacterDetails(character)}
               >
                 <TableCell>{character.name}</TableCell>
@@ -86,4 +87,4 @@ function CharactersMUITable({
   )
 }
 
-export default CharactersMUITable
+export default TableContent

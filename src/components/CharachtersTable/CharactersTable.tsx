@@ -1,20 +1,9 @@
-import * as React from "react"
-import { CssVarsProvider } from "@mui/joy/styles"
-import CssBaseline from "@mui/joy/CssBaseline"
-import Box from "@mui/joy/Box"
-import Button from "@mui/joy/Button"
-import Breadcrumbs from "@mui/joy/Breadcrumbs"
-import Link from "@mui/joy/Link"
-import Typography from "@mui/joy/Typography"
-
-import Table from "@mui/joy/Table"
-import { Sheet } from "@mui/joy"
 import {
   type ApiInfo,
   type DisneyCharacter,
 } from "../../utils/types/DisneyCharsApiResponse"
 import { HeaderOptions } from "../HeaderOptions/HeaderOptions"
-import CharactersMUITable from "../MuiTable/Table"
+import TableContent from "../TableContent/Table"
 
 interface TableDataProps {
   info: ApiInfo
@@ -50,7 +39,7 @@ export default function CharactersTable({
         updateCharactersPerPage={updateCharactersPerPage}
         handleGoToPageClick={handleGoToPageClick}
       />
-      <CharactersMUITable
+      <TableContent
         characters={data}
         handleShowCharacterDetails={handleShowCharacterDetails}
       />

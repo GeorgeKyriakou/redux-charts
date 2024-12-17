@@ -4,6 +4,7 @@ import { type DisneyCharacter } from "../types/DisneyCharsApiResponse"
 export const uiStateSlice = createSlice({
   name: "uiState",
   initialState: {
+    isStatisticsModalOpen: false,
     isCharacterDetailsModalOpen: false,
     selectedCharacter: {} as DisneyCharacter,
     pagination: {
@@ -21,8 +22,12 @@ export const uiStateSlice = createSlice({
     toggleCharacterDetailsModal: state => {
       state.isCharacterDetailsModalOpen = !state.isCharacterDetailsModalOpen
     },
+    toggleStatisticsModal: state => {
+      state.isStatisticsModalOpen = !state.isStatisticsModalOpen
+    },
+    calculateStatistics: state => {},
     closeCharacterInfo: state => {
-      state.selectedCharacter._id = -1
+      state.selectedCharacter = {} as DisneyCharacter
     },
   },
 })
@@ -32,6 +37,7 @@ export const {
   selectCharacter,
   toggleCharacterDetailsModal,
   closeCharacterInfo,
+  toggleStatisticsModal,
 } = uiStateSlice.actions
 
 export default uiStateSlice

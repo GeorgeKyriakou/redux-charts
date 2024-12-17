@@ -19,9 +19,7 @@
   align-items: center;
 }
 
-.scrollToTopBtn {
-  right: 5%;
-  bottom: 5%;
+.miscBtn {
   opacity: 0;
   z-index: 10;
   width: 50px;
@@ -41,9 +39,16 @@
     background-color 0.3s;
   animation: fadeIn 0.3s forwards;
 }
-
-.scrollToTopBtn:hover {
+.miscBtn:hover {
   background-color: #0056b3;
+}
+.scrollToTopBtn {
+  right: 5%;
+  bottom: 5%;
+}
+.statisticsModalBtn {
+  left: 5%;
+  bottom: 5%;
 }
 
 @keyframes fadeIn {

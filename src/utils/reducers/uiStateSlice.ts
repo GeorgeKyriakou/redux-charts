@@ -14,8 +14,8 @@ export const uiStateSlice = createSlice({
     pagination: (state, action) => {
       state.pagination = { ...state.pagination, ...action.payload }
     },
-    selectCharacter: (state, action: PayloadAction<DisneyCharacter>) => {
-      state.selectedCharacterId = action.payload._id
+    selectCharacter: (state, action: PayloadAction<number>) => {
+      state.selectedCharacterId = action.payload
     },
     openCharacterInfo: state => {
       // TODO: Implement

@@ -1,11 +1,13 @@
 export type ApiResponse = {
-  info: {
-    count: number
-    totalPages: number
-    previousPage: number | null
-    nextPage: string
-  }
+  info: ApiInfo
   data: DisneyCharacter[]
+}
+
+export type ApiInfo = {
+  count: number
+  totalPages: number
+  previousPage: number | null
+  nextPage: string
 }
 
 export type DisneyCharacter = {

@@ -13,6 +13,7 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks"
 import CharactersTable from "../../components/CharachtersTable/CharactersTable"
 import { type DisneyCharacter } from "../../utils/types/DisneyCharsApiResponse"
 import { ChevronUp, ChartPie } from "lucide-react"
+import CharactersMUITable from "../../components/MuiTable/Table"
 
 export const DisneyCharacters = () => {
   const dispatch = useAppDispatch()
@@ -38,6 +39,7 @@ export const DisneyCharacters = () => {
     index: currentPage,
     pageSize: charactersPerPage,
   })
+
   const filteredCharacters = useMemo<DisneyCharacter[]>(
     () =>
       data === undefined

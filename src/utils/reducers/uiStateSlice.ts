@@ -25,7 +25,6 @@ export const uiStateSlice = createSlice({
     toggleStatisticsModal: state => {
       state.isStatisticsModalOpen = !state.isStatisticsModalOpen
     },
-    calculateStatistics: state => {},
     closeCharacterInfo: state => {
       state.selectedCharacter = {} as DisneyCharacter
     },

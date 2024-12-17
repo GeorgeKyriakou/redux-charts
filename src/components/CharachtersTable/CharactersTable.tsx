@@ -14,6 +14,7 @@ import {
   type DisneyCharacter,
 } from "../../utils/types/DisneyCharsApiResponse"
 import { HeaderOptions } from "../HeaderOptions/HeaderOptions"
+import CharactersMUITable from "../MuiTable/Table"
 
 interface TableDataProps {
   info: ApiInfo
@@ -39,8 +40,7 @@ export default function CharactersTable({
   handleShowCharacterDetails,
 }: TableDataProps) {
   return (
-    <CssVarsProvider disableTransitionOnChange>
-      <CssBaseline />
+    <>
       <HeaderOptions
         info={info}
         charactersPerPage={charactersPerPage}
@@ -50,52 +50,10 @@ export default function CharactersTable({
         updateCharactersPerPage={updateCharactersPerPage}
         handleGoToPageClick={handleGoToPageClick}
       />
-      <Sheet>
-        <Table
-          sx={{
-            display: "table",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <thead>
-            <tr>
-              <th style={{ width: "2%" }}>#</th>
-              <th style={{ width: "30%" }}>Name</th>
-              <th style={{ width: "10%" }}>TV shows</th>
-              <th style={{ width: "10%" }}>Video Games</th>
-              <th style={{ width: "19%" }}>Allies</th>
-              <th style={{ width: "19%" }}>Enemies</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((character, i) => {
-              if (character.allies.length !== 0) {
-                console.log(character)
-              }
-              return (
-                <tr
-                  style={{
-                    cursor: "pointer",
-                    ...(i % 2 === 0 && { backgroundColor: "#f5e1cc" }),
-                  }}
-                  key={character._id}
-                  onClick={() => handleShowCharacterDetails(character)}
-                >
-                  <td>{i + 1}</td>
-                  <td>
-                    <Typography>{character.name}</Typography>
-                  </td>
-                  <td>{character.tvShows.length}</td>
-                  <td>{character.videoGames.length}</td>
-                  <td>{character.allies.join(", ")}</td>
-                  <td>{character.enemies.join(", ")}</td>
-                </tr>
-              )
-            })}
-          </tbody>
-        </Table>
-      </Sheet>
-    </CssVarsProvider>
+      <CharactersMUITable
+        characters={data}
+        handleShowCharacterDetails={handleShowCharacterDetails}
+      />
+    </>
   )
 }

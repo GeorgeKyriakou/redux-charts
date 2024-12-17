@@ -1,55 +1,52 @@
 import { useEffect, useState } from "react"
 import { useAppSelector } from "../../app/hooks"
 import { useGetDisneyCharactersQuery } from "../../features/disneyCharacters/disneyCharactersApiSlice"
-const initOptions = {
+
+const chartSettings = {
   chart: {
+    height: 500,
     type: "pie",
   },
   title: {
     text: "Number of films each character participates in",
   },
   tooltip: {
-    valueSuffix: "film(s)",
+    valueSuffix: " film(s)",
   },
 
   plotOptions: {
-    series: {
+    pie: {
+      size: 300,
+    },
+  },
+  series: [
+    {
       allowPointSelect: true,
       cursor: "pointer",
       dataLabels: [
         {
           enabled: true,
-          distance: 20,
+          distance: 50,
         },
         {
           enabled: true,
-          distance: -40,
+          distance: -30,
           format: "{point.percentage:.1f}%",
-          style: {
-            fontSize: "1.2em",
-            textOutline: "none",
-            opacity: 0.7,
-          },
-          filter: {
-            operator: ">",
-            property: "percentage",
-            value: 10,
-          },
         },
       ],
-    },
-  },
-  series: [
-    {
       data: [],
     },
   ],
 }
 export function useGetChartStatiscsOptions() {
-  const [options, setOptions] = useState(initOptions)
+  const [seriesData, setSeriesData] = useState({
+    data: [] as { name: string; y: number }[],
+  })
+
   const { charactersPerPage, currentPage } = useAppSelector(
     state => state.uiState.pagination,
   )
+
   const isStatisticsModalOpen = useAppSelector(
     state => state.uiState.isStatisticsModalOpen,
   )
@@ -61,22 +58,14 @@ export function useGetChartStatiscsOptions() {
   useEffect(() => {
     if (data && isStatisticsModalOpen) {
       const characters = data.data
-      setOptions(
-        o =>
-          ({
-            ...o,
-            series: [
-              {
-                data: characters.map(character => ({
-                  name: character.name,
-                  y: character.films.length,
-                })),
-              },
-            ],
-          }) as any,
-      )
+      setSeriesData({
+        data: characters.map(character => ({
+          name: character.name,
+          y: character.films.length,
+        })),
+      })
     }
   }, [data, isStatisticsModalOpen])
 
-  return { options, isLoading, isError }
+  return { seriesData, chartSettings, isLoading, isError }
 }

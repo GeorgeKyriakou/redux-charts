@@ -5,10 +5,11 @@ import { useGetDisneyCharactersQuery } from "./disneyCharactersApiSlice"
 import { LoadingSpinner } from "../../components/LoadingSpinner/LoadingSpinner"
 import {
   selectCharacter,
+  setPagination,
   toggleCharacterDetailsModal,
   toggleStatisticsModal,
 } from "../../utils/reducers/uiStateSlice"
-import { useAppDispatch } from "../../app/hooks"
+import { useAppDispatch, useAppSelector } from "../../app/hooks"
 import CharactersTable from "../../components/CharachtersTable/CharactersTable"
 import { type DisneyCharacter } from "../../utils/types/DisneyCharsApiResponse"
 import { ChevronUp, ChartPie } from "lucide-react"
@@ -16,8 +17,6 @@ import { ChevronUp, ChartPie } from "lucide-react"
 export const DisneyCharacters = () => {
   const dispatch = useAppDispatch()
   const [isBackToTopVisible, setIsBackToTopVisible] = useState(false)
-  const [charactersPerPage, updateCharactersPerPage] = useState(50)
-  const [currentPageIndex, updateCurrentPageIndex] = useState(1)
   const [searchValue, setSearchValue] = useState<string>("")
 
   useEffect(() => {
@@ -32,8 +31,11 @@ export const DisneyCharacters = () => {
     return () => window.removeEventListener("scroll", toggleVisibility)
   }, [])
 
+  const { charactersPerPage, currentPage } = useAppSelector(
+    state => state.uiState.pagination,
+  )
   const { data, isError, isLoading, isSuccess } = useGetDisneyCharactersQuery({
-    index: currentPageIndex,
+    index: currentPage,
     pageSize: charactersPerPage,
   })
   const filteredCharacters = useMemo<DisneyCharacter[]>(
@@ -48,13 +50,20 @@ export const DisneyCharacters = () => {
     [data, searchValue],
   )
 
+  const handleChangeCharactersPerPage = (n: number) => {
+    dispatch(setPagination({ charactersPerPage: n }))
+  }
+
+  const handleChangePageIndex = (n: number) => {
+    dispatch(setPagination({ currentPage: n }))
+  }
+
   const handleShowCharacterDetails = (character: DisneyCharacter) => {
     dispatch(selectCharacter(character))
     dispatch(toggleCharacterDetailsModal())
   }
 
   if (isError) {
-    // TODO: log error in our monitoring system
     return (
       <div>
         <h1>There was an error fetching from the api</h1>
@@ -89,10 +98,10 @@ export const DisneyCharacters = () => {
           info={data.info}
           data={filteredCharacters}
           searchValue={searchValue}
-          currentPageIndex={currentPageIndex}
-          updateCharactersPerPage={updateCharactersPerPage}
-          handleGoToPageClick={updateCurrentPageIndex}
+          currentPageIndex={currentPage}
+          updateCharactersPerPage={handleChangeCharactersPerPage}
           charactersPerPage={charactersPerPage}
+          handleGoToPageClick={handleChangePageIndex}
           handleSearchByName={setSearchValue}
           handleShowCharacterDetails={handleShowCharacterDetails}
         />

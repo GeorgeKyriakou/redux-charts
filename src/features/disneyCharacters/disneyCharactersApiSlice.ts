@@ -6,7 +6,10 @@ export const disneyCharactersApiSlice = createApi({
   reducerPath: "disneyCharactersApi",
   tagTypes: ["DisneyCharacters"],
   endpoints: build => ({
-    getDisneyCharacters: build.query<ApiResponse,{ index: number; pageSize: number }>({
+    getDisneyCharacters: build.query<
+      ApiResponse,
+      { index: number; pageSize: number }
+    >({
       query: ({ index = 1, pageSize = 50 }) =>
         `?page=${index}&pageSize=${pageSize}`,
       providesTags: (result, error, { index, pageSize }) => [

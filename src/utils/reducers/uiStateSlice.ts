@@ -13,7 +13,7 @@ export const uiStateSlice = createSlice({
     },
   },
   reducers: {
-    pagination: (state, action) => {
+    setPagination: (state, action) => {
       state.pagination = { ...state.pagination, ...action.payload }
     },
     selectCharacter: (state, action: PayloadAction<DisneyCharacter>) => {
@@ -34,6 +34,7 @@ export const uiStateSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const {
+  setPagination,
   selectCharacter,
   toggleCharacterDetailsModal,
   closeCharacterInfo,

@@ -21,10 +21,10 @@ interface TableDataProps {
   searchValue: string
   charactersPerPage: number
   currentPageIndex: number
-  handleSearchByName: (name: string) => void
-  handleShowCharacterDetails: (id: number) => void
   handleGoToPageClick: (n: number) => void
+  handleSearchByName: (name: string) => void
   updateCharactersPerPage: (n: number) => void
+  handleShowCharacterDetails: (character: DisneyCharacter) => void
 }
 
 export default function CharactersTable({
@@ -47,7 +47,7 @@ export default function CharactersTable({
         searchValue={searchValue}
         handleSearchByName={handleSearchByName}
         currentPageIndex={currentPageIndex}
-        updatecharactersPerPage={updateCharactersPerPage}
+        updateCharactersPerPage={updateCharactersPerPage}
         handleGoToPageClick={handleGoToPageClick}
       />
       <Sheet>
@@ -80,7 +80,7 @@ export default function CharactersTable({
                     ...(i % 2 === 0 && { backgroundColor: "#f5e1cc" }),
                   }}
                   key={character._id}
-                  onClick={() => handleShowCharacterDetails(character._id)}
+                  onClick={() => handleShowCharacterDetails(character)}
                 >
                   <td>{i + 1}</td>
                   <td>

@@ -4,7 +4,8 @@ import { type DisneyCharacter } from "../types/DisneyCharsApiResponse"
 export const uiStateSlice = createSlice({
   name: "uiState",
   initialState: {
-    selectedCharacterId: 0,
+    isCharacterDetailsModalOpen: false,
+    selectedCharacter: {} as DisneyCharacter,
     pagination: {
       currentPage: 1,
       charactersPerPage: 50,
@@ -14,20 +15,23 @@ export const uiStateSlice = createSlice({
     pagination: (state, action) => {
       state.pagination = { ...state.pagination, ...action.payload }
     },
-    selectCharacter: (state, action: PayloadAction<number>) => {
-      state.selectedCharacterId = action.payload
+    selectCharacter: (state, action: PayloadAction<DisneyCharacter>) => {
+      state.selectedCharacter = action.payload
     },
-    openCharacterInfo: state => {
-      // TODO: Implement
+    toggleCharacterDetailsModal: state => {
+      state.isCharacterDetailsModalOpen = !state.isCharacterDetailsModalOpen
     },
-    closeCharacterInfo: (state, action) => {
-      // TODO: Implement
+    closeCharacterInfo: state => {
+      state.selectedCharacter._id = -1
     },
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { selectCharacter, openCharacterInfo, closeCharacterInfo } =
-  uiStateSlice.actions
+export const {
+  selectCharacter,
+  toggleCharacterDetailsModal,
+  closeCharacterInfo,
+} = uiStateSlice.actions
 
 export default uiStateSlice

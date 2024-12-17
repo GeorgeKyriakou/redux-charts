@@ -2,7 +2,10 @@ import { useEffect, useMemo, useState } from "react"
 import styles from "./Characters.module.css"
 import { useGetDisneyCharactersQuery } from "./disneyCharactersApiSlice"
 import { LoadingSpinner } from "../../components/LoadingSpinner/LoadingSpinner"
-import { selectCharacter } from "../../utils/reducers/uiStateSlice"
+import {
+  selectCharacter,
+  toggleCharacterDetailsModal,
+} from "../../utils/reducers/uiStateSlice"
 import { useAppDispatch } from "../../app/hooks"
 import CharactersTable from "../../components/CharachtersTable/CharactersTable"
 import { type DisneyCharacter } from "../../utils/types/DisneyCharsApiResponse"
@@ -50,8 +53,9 @@ export const DisneyCharacters = () => {
     [data, searchValue],
   )
 
-  const handleShowCharacterDetails = (characterId: number) => {
-    dispatch(selectCharacter(characterId))
+  const handleShowCharacterDetails = (character: DisneyCharacter) => {
+    dispatch(selectCharacter(character))
+    dispatch(toggleCharacterDetailsModal())
   }
 
   if (isError) {

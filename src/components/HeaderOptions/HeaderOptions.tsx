@@ -10,12 +10,12 @@ interface HeaderOptionsProps {
   charactersPerPage: number
   handleGoToPageClick: (n: number) => void
   handleSearchByName: (name: string) => void
-  updatecharactersPerPage: (n: number) => void
+  updateCharactersPerPage: (n: number) => void
 }
 
 export function HeaderOptions({
   charactersPerPage,
-  updatecharactersPerPage,
+  updateCharactersPerPage,
   currentPageIndex,
   handleGoToPageClick,
   info,
@@ -29,7 +29,7 @@ export function HeaderOptions({
           <label htmlFor="charactersPerPage">Characters per page</label>
           <select
             id="charactersPerPage"
-            onChange={e => updatecharactersPerPage(Number(e.target.value))}
+            onChange={e => updateCharactersPerPage(Number(e.target.value))}
             value={charactersPerPage}
           >
             {ITEMS_PER_PAGE.map(option => (

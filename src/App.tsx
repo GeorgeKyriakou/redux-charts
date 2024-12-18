@@ -1,7 +1,7 @@
 import "./App.css"
-import { CharacterModal } from "./features/characterDetails/CharacterDetailsModal"
-import { CharactersStatisticsModal } from "./features/chartStats/ChartStats"
-import { DisneyCharacters } from "./features/disneyCharacters/Characters"
+import { CharacterModal } from "@/features/characterDetails/CharacterDetailsModal"
+import { CharactersStatisticsModal } from "@/features/chartStats/ChartStats"
+import { DisneyCharacters } from "@/features/disneyCharacters/Characters"
 
 const App = () => {
   return (

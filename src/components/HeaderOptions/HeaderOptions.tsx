@@ -1,5 +1,5 @@
 import styles from "./HeaderOptions.module.css"
-import { type ApiInfo } from "../../utils/types/DisneyCharsApiResponse"
+import { type ApiInfo } from "@/utils/types/DisneyCharsApiResponse"
 
 const ITEMS_PER_PAGE = [10, 20, 50, 100, 200, 500]
 

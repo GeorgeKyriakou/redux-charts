@@ -1,7 +1,7 @@
 import { useState } from "react"
 import Header from "./Header"
 import { Table, TableCell, TableContainer, TableRow } from "@mui/material"
-import { type DisneyCharacter } from "../../utils/types/DisneyCharsApiResponse"
+import { type DisneyCharacter } from "@/utils/types/DisneyCharsApiResponse"
 
 const descendingComparator = (a: any, b: any, orderBy: string) => {
   if (b[orderBy] < a[orderBy]) {

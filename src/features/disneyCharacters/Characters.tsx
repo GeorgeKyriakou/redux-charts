@@ -3,16 +3,16 @@ import clsx from "clsx"
 import styles from "./Characters.module.css"
 import { useDebounce } from "use-debounce"
 import { useGetDisneyCharactersQuery } from "./disneyCharactersApiSlice"
-import { LoadingSpinner } from "../../components/LoadingSpinner/LoadingSpinner"
+import { LoadingSpinner } from "@/components/LoadingSpinner/LoadingSpinner"
 import {
   selectCharacter,
   setPagination,
   toggleCharacterDetailsModal,
   toggleStatisticsModal,
-} from "../../utils/reducers/uiStateSlice"
-import { useAppDispatch, useAppSelector } from "../../app/hooks"
-import CharactersTable from "../../components/CharachtersTable/CharactersTable"
-import { type DisneyCharacter } from "../../utils/types/DisneyCharsApiResponse"
+} from "@/utils/reducers/uiStateSlice"
+import { useAppDispatch, useAppSelector } from "@/app/hooks"
+import CharactersTable from "@/components/CharachtersTable/CharactersTable"
+import { type DisneyCharacter } from "@/utils/types/DisneyCharsApiResponse"
 import { ChevronUp, ChartPie } from "lucide-react"
 
 export const DisneyCharacters = () => {

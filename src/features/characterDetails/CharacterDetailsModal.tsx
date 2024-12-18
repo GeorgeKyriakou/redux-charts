@@ -1,8 +1,8 @@
 import { useRef } from "react"
 import styles from "./CharacterDetailsModal.module.css"
 import { useAppDispatch, useAppSelector } from "../../app/hooks"
-import { useDetectClick } from "../../utils/hooks/useDetectClick"
-import { toggleCharacterDetailsModal } from "../../utils/reducers/uiStateSlice"
+import { useDetectClick } from "@/utils/hooks/useDetectClick"
+import { toggleCharacterDetailsModal } from "@/utils/reducers/uiStateSlice"
 
 export function CharacterModal() {
   const dispatch = useAppDispatch()

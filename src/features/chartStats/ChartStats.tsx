@@ -3,11 +3,11 @@ import styles from "./ChartStats.module.css"
 import HighchartsReact from "highcharts-react-official"
 import Highcharts, { type SeriesOptionsType } from "highcharts"
 
-import { useAppDispatch, useAppSelector } from "../../app/hooks"
-import { useDetectClick } from "../../utils/hooks/useDetectClick"
-import { toggleStatisticsModal } from "../../utils/reducers/uiStateSlice"
-import { LoadingSpinner } from "../../components/LoadingSpinner/LoadingSpinner"
-import { useGetChartStatiscsOptions } from "../../utils/hooks/useGetChartStatiscsOptions"
+import { useAppDispatch, useAppSelector } from "@/app/hooks"
+import { useDetectClick } from "@/utils/hooks/useDetectClick"
+import { toggleStatisticsModal } from "@/utils/reducers/uiStateSlice"
+import { LoadingSpinner } from "@/components/LoadingSpinner/LoadingSpinner"
+import { useGetChartStatiscsOptions } from "@/utils/hooks/useGetChartStatiscsOptions"
 
 export function CharactersStatisticsModal() {
   const dispatch = useAppDispatch()

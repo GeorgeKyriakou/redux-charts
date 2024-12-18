@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
-import { type ApiResponse } from "../../utils/types/DisneyCharsApiResponse"
+import { type ApiResponse } from "@/utils/types/DisneyCharsApiResponse"
 
 export const disneyCharactersApiSlice = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: "https://api.disneyapi.dev/character" }),
@@ -12,7 +12,7 @@ export const disneyCharactersApiSlice = createApi({
     >({
       query: ({ index = 1, pageSize = 50 }) =>
         `?page=${index}&pageSize=${pageSize}`,
-      providesTags: (result, error, { index, pageSize }) => [
+      providesTags: (_, __, { index, pageSize }) => [
         { type: `DisneyCharacters`, id: `${index}x${pageSize}` },
       ],
     }),

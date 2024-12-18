@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
-import { useAppSelector } from "../../app/hooks"
-import { useGetDisneyCharactersQuery } from "../../features/disneyCharacters/disneyCharactersApiSlice"
+import { useAppSelector } from "@/app/hooks"
+import { useGetDisneyCharactersQuery } from "@/features/disneyCharacters/disneyCharactersApiSlice"
 
 const chartSettings = {
   chart: {

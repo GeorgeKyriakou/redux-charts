@@ -1,9 +1,9 @@
 import {
   type ApiInfo,
   type DisneyCharacter,
-} from "../../utils/types/DisneyCharsApiResponse"
-import { HeaderOptions } from "../HeaderOptions/HeaderOptions"
-import TableContent from "../TableContent/Table"
+} from "@/utils/types/DisneyCharsApiResponse"
+import { HeaderOptions } from "@/components/HeaderOptions/HeaderOptions"
+import TableContent from "@/components/TableContent/Table"
 
 interface TableDataProps {
   info: ApiInfo

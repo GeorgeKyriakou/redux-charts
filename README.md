@@ -16,6 +16,10 @@ Also uses [Highcharts](https://www.highcharts.com/?credits) to display statistic
 - Opens statistics modal to display pie chart of tv show appearances
 - Is accessible
 
+## Usage
+
+To run the app locally, in your terminal at the root of the project `npm install && npm run dev`
+
 ## Scripts
 
 - `dev`/`start` - start dev server and open browser

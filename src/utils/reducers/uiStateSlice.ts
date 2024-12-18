@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit"
-import { type DisneyCharacter } from "../types/DisneyCharsApiResponse"
+import { type DisneyCharacter } from "@/utils/types/DisneyCharsApiResponse"
 
 export const uiStateSlice = createSlice({
   name: "uiState",

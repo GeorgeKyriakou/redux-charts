@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react"
 import clsx from "clsx"
 import styles from "./Characters.module.css"
+import { useDebounce } from "use-debounce"
 import { useGetDisneyCharactersQuery } from "./disneyCharactersApiSlice"
 import { LoadingSpinner } from "../../components/LoadingSpinner/LoadingSpinner"
 import {
@@ -18,6 +19,9 @@ export const DisneyCharacters = () => {
   const dispatch = useAppDispatch()
   const [isBackToTopVisible, setIsBackToTopVisible] = useState(false)
   const [searchValue, setSearchValue] = useState<string>("")
+  const [movieSearchValue, setMovieSearchValue] = useState<string>("")
+  const [debouncedMovieSearchValue] = useDebounce(movieSearchValue, 500)
+  const [searchingBy, setSearchingBy] = useState<"name" | "movie" | null>(null)
 
   useEffect(() => {
     const toggleVisibility = () => {
@@ -39,17 +43,43 @@ export const DisneyCharacters = () => {
     pageSize: charactersPerPage,
   })
 
-  const filteredCharacters = useMemo<DisneyCharacter[]>(
-    () =>
-      data === undefined
+  const filteredCharacters = useMemo<DisneyCharacter[]>(() => {
+    if (searchingBy === "name") {
+      return data === undefined
         ? ([] as DisneyCharacter[])
         : searchValue === ""
-          ? data?.data
-          : data?.data.filter(character =>
+          ? data.data
+          : data.data.filter(character =>
               character.name.toLowerCase().includes(searchValue.toLowerCase()),
-            ),
-    [data, searchValue],
-  )
+            )
+    } else if (searchingBy === "movie") {
+      return data === undefined
+        ? ([] as DisneyCharacter[])
+        : debouncedMovieSearchValue === ""
+          ? data.data
+          : data.data.filter(character =>
+              character.tvShows.some(tvShow => {
+                return tvShow
+                  .toLowerCase()
+                  .includes(debouncedMovieSearchValue.toLowerCase())
+              }),
+            )
+    }
+    return data?.data || []
+  }, [data, searchValue, debouncedMovieSearchValue, searchingBy])
+
+  const handleSearchByName = (name: string) => {
+    setSearchValue(() => {
+      setSearchingBy("name")
+      return name
+    })
+  }
+  const handleSearchByMovie = (movie: string) => {
+    setMovieSearchValue(() => {
+      setSearchingBy("movie")
+      return movie
+    })
+  }
 
   const handleChangeCharactersPerPage = (n: number) => {
     dispatch(setPagination({ charactersPerPage: n }))
@@ -99,11 +129,13 @@ export const DisneyCharacters = () => {
           info={data.info}
           data={filteredCharacters}
           searchValue={searchValue}
+          movieSearchValue={movieSearchValue}
+          handleSearchByMovie={handleSearchByMovie}
           currentPageIndex={currentPage}
           updateCharactersPerPage={handleChangeCharactersPerPage}
           charactersPerPage={charactersPerPage}
           handleGoToPageClick={handleChangePageIndex}
-          handleSearchByName={setSearchValue}
+          handleSearchByName={handleSearchByName}
           handleShowCharacterDetails={handleShowCharacterDetails}
         />
       </div>

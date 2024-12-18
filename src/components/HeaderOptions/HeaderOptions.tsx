@@ -6,21 +6,25 @@ const ITEMS_PER_PAGE = [10, 20, 50, 100, 200, 500]
 interface HeaderOptionsProps {
   info: ApiInfo
   searchValue: string
+  movieSearchValue: string
   currentPageIndex: number
   charactersPerPage: number
+  handleSearchByMovie: (movie: string) => void
   handleGoToPageClick: (n: number) => void
   handleSearchByName: (name: string) => void
   updateCharactersPerPage: (n: number) => void
 }
 
 export function HeaderOptions({
-  charactersPerPage,
-  updateCharactersPerPage,
-  currentPageIndex,
-  handleGoToPageClick,
   info,
   searchValue,
+  movieSearchValue,
+  currentPageIndex,
+  charactersPerPage,
   handleSearchByName,
+  handleSearchByMovie,
+  handleGoToPageClick,
+  updateCharactersPerPage,
 }: HeaderOptionsProps) {
   return (
     <header className={styles.modernHeader}>
@@ -77,9 +81,17 @@ export function HeaderOptions({
         <div className={styles.searchContainer}>
           <input
             type="text"
-            placeholder="Search by name"
+            placeholder="Character name..."
             value={searchValue}
             onChange={e => handleSearchByName(e.target.value)}
+          />
+        </div>
+        <div className={styles.searchContainer}>
+          <input
+            type="text"
+            placeholder="Movie title..."
+            value={movieSearchValue}
+            onChange={e => handleSearchByMovie(e.target.value)}
           />
         </div>
       </div>

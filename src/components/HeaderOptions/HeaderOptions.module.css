@@ -62,9 +62,10 @@ input[type="text"]:focus {
 }
 
 .pagination {
+  gap: 0.5rem;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  justify-content: center;
 }
 
 .pagination button {

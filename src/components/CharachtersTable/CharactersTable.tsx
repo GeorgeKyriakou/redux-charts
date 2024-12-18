@@ -11,6 +11,8 @@ interface TableDataProps {
   searchValue: string
   charactersPerPage: number
   currentPageIndex: number
+  movieSearchValue: string
+  handleSearchByMovie: (movie: string) => void
   handleGoToPageClick: (n: number) => void
   handleSearchByName: (name: string) => void
   updateCharactersPerPage: (n: number) => void
@@ -21,10 +23,12 @@ export default function CharactersTable({
   data,
   info,
   searchValue,
+  movieSearchValue,
   currentPageIndex,
   charactersPerPage,
   handleSearchByName,
   handleGoToPageClick,
+  handleSearchByMovie,
   updateCharactersPerPage,
   handleShowCharacterDetails,
 }: TableDataProps) {
@@ -32,12 +36,14 @@ export default function CharactersTable({
     <>
       <HeaderOptions
         info={info}
-        charactersPerPage={charactersPerPage}
         searchValue={searchValue}
-        handleSearchByName={handleSearchByName}
+        movieSearchValue={movieSearchValue}
+        handleSearchByMovie={handleSearchByMovie}
         currentPageIndex={currentPageIndex}
-        updateCharactersPerPage={updateCharactersPerPage}
+        charactersPerPage={charactersPerPage}
+        handleSearchByName={handleSearchByName}
         handleGoToPageClick={handleGoToPageClick}
+        updateCharactersPerPage={updateCharactersPerPage}
       />
       <TableContent
         characters={data}

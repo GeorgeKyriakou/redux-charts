@@ -13,7 +13,6 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks"
 import CharactersTable from "../../components/CharachtersTable/CharactersTable"
 import { type DisneyCharacter } from "../../utils/types/DisneyCharsApiResponse"
 import { ChevronUp, ChartPie } from "lucide-react"
-import TableContent from "../../components/TableContent/Table"
 
 export const DisneyCharacters = () => {
   const dispatch = useAppDispatch()

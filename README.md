@@ -6,8 +6,10 @@ Also uses [Highcharts](https://www.highcharts.com/?credits) to display statistic
 ## Goals / Requirements
 
 - Present characters fetched from the disney API
+- Use react query cache as state management
 - Display table with characters info
 - Table is sortable by name
+- Table is paginated with navigation buttons
 - There is a filter (search) functionality by name
 - There is a filter (search) functionality by appearance in tv show
 - Opens character detail modal sheet

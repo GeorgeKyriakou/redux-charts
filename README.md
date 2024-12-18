@@ -1,27 +1,21 @@
-# vite-template-redux
+# React Redux Disney Character hub
 
-Uses [Vite](https://vitejs.dev/), [Vitest](https://vitest.dev/), and [React Testing Library](https://github.com/testing-library/react-testing-library) to create a modern [React](https://react.dev/) app compatible with [Create React App](https://create-react-app.dev/)
+Built on top of the vite-template-redux [Vite](https://vitejs.dev/), [Vitest](https://vitest.dev/), and [React Testing Library](https://github.com/testing-library/react-testing-library) to create a modern [React](https://react.dev/) app compatible with [Create React App](https://create-react-app.dev/)
+Also uses [Highcharts](https://www.highcharts.com/?credits) to display statistics pie chart
 
-```sh
-npx degit reduxjs/redux-templates/packages/vite-template-redux my-app
-```
+## Goals / Requirements
 
-## Goals
-
-- Easy migration from Create React App or Vite
-- As beginner friendly as Create React App
-- Optimized performance compared to Create React App
-- Customizable without ejecting
+- Present characters fetched from the disney API
+- Display table with characters info
+- Table is sortable by name
+- There is a filter (search) functionality by name
+- There is a filter (search) functionality by appearance in tv show
+- Opens character detail modal sheet
+- Opens statistics modal to display pie chart of tv show appearances
+- Is accessible
 
 ## Scripts
 
 - `dev`/`start` - start dev server and open browser
 - `build` - build for production
 - `preview` - locally preview production build
-- `test` - launch test runner
-
-## Inspiration
-
-- [Create React App](https://github.com/facebook/create-react-app/tree/main/packages/cra-template)
-- [Vite](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react)
-- [Vitest](https://github.com/vitest-dev/vitest/tree/main/examples/react-testing-lib)

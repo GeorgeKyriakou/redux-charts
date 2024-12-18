@@ -10,9 +10,17 @@ export function useDetectClick(
         cb()
       }
     }
+    function handleKeyDown(event: KeyboardEvent) {
+      if (ref.current && event.key === "Escape") {
+        cb()
+      }
+    }
     document.addEventListener("mousedown", handleClickOutside)
+    document.addEventListener("keydown", handleKeyDown)
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside)
+      document.removeEventListener("keydown", handleKeyDown)
     }
   }, [ref, cb])
 }
